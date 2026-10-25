@@ -1,0 +1,630 @@
+{
+  "x402Version": 2,
+  "error": "Payment required",
+  "resource": {
+    "url": "http://list-smith-production.up.railway.app/v1/fix",
+    "description": "Repair one x402 route's Bazaar discovery metadata in one call. Send a resource URL and one real sample output; get the defect report plus a complete discovery package \u2014 full output schema inferred from the sample, a sub-500-char description with a use-when sentence, OpenAPI and well-known snippets, paste-in instructions \u2014 that ships only after passing both x402 SDK validators. Use this when your listing is hollow, invalid, or invisible in the Bazaar.",
+    "mimeType": "application/json",
+    "serviceName": "list-smith",
+    "tags": [
+      "x402",
+      "bazaar",
+      "discovery",
+      "validation",
+      "schema",
+      "agents"
+    ]
+  },
+  "accepts": [
+    {
+      "scheme": "exact",
+      "network": "eip155:8453",
+      "asset": "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913",
+      "amount": "500000",
+      "payTo": "0x097f9685D1e0752bF8B02d61E5Ce9be7eA0FBA7F",
+      "maxTimeoutSeconds": 300,
+      "extra": {
+        "name": "USD Coin",
+        "version": "2"
+      }
+    }
+  ],
+  "extensions": {
+    "bazaar": {
+      "info": {
+        "input": {
+          "type": "http",
+          "method": "POST",
+          "bodyType": "json",
+          "body": {
+            "resource_url": "https://target.example.com/v1/thing",
+            "sample_output": {
+              "verdict": "OK",
+              "score": 12
+            },
+            "name": "Target Thing",
+            "category": "data"
+          }
+        },
+        "output": {
+          "type": "json",
+          "example": {
+            "resource_url": "https://target.example.com/v1/thing",
+            "graded_at": "2026-10-21T21:38:16.624678+00:00",
+            "score_before": 88,
+            "defects": [
+              {
+                "name": "hollow output schema (example only, no typed schema)",
+                "severity": "major",
+                "detail": "info.output carries only type/example \u2014 the hollow shape 87.8% of listings ship. No field is typed, so a buyer cannot validate a response."
+              }
+            ],
+            "package": {
+              "inferred_from": "single_sample",
+              "description": "Target Thing \u2014 returns verdict, score. Use when you need structured data inside an agent workflow. $0.02 per call in USDC on Base via x402.",
+              "extension": {
+                "info": {
+                  "input": {
+                    "type": "http",
+                    "method": "POST",
+                    "bodyType": "json",
+                    "body": {
+                      "thing_id": "abc"
+                    }
+                  },
+                  "output": {
+                    "type": "json",
+                    "example": {
+                      "verdict": "OK",
+                      "score": 12
+                    },
+                    "schema": {
+                      "type": "object",
+                      "properties": {
+                        "verdict": {
+                          "type": "string"
+                        },
+                        "score": {
+                          "type": "integer"
+                        }
+                      },
+                      "required": [
+                        "verdict",
+                        "score"
+                      ]
+                    }
+                  }
+                },
+                "schema": {
+                  "$schema": "https://json-schema.org/draft/2020-12/schema",
+                  "type": "object",
+                  "properties": {
+                    "input": {
+                      "type": "object",
+                      "properties": {
+                        "type": {
+                          "type": "string",
+                          "const": "http"
+                        },
+                        "method": {
+                          "type": "string",
+                          "enum": [
+                            "POST",
+                            "PUT",
+                            "PATCH"
+                          ]
+                        },
+                        "bodyType": {
+                          "type": "string",
+                          "enum": [
+                            "json",
+                            "form-data",
+                            "text"
+                          ]
+                        },
+                        "body": {
+                          "type": "object",
+                          "properties": {
+                            "thing_id": {
+                              "type": "string"
+                            }
+                          },
+                          "required": [
+                            "thing_id"
+                          ]
+                        }
+                      },
+                      "required": [
+                        "type",
+                        "method",
+                        "bodyType",
+                        "body"
+                      ],
+                      "additionalProperties": false
+                    },
+                    "output": {
+                      "type": "object",
+                      "properties": {
+                        "type": {
+                          "type": "string"
+                        },
+                        "example": {
+                          "type": "object",
+                          "properties": {
+                            "verdict": {
+                              "type": "string"
+                            },
+                            "score": {
+                              "type": "integer"
+                            }
+                          },
+                          "required": [
+                            "verdict",
+                            "score"
+                          ]
+                        },
+                        "schema": {
+                          "type": "object"
+                        }
+                      },
+                      "required": [
+                        "type"
+                      ]
+                    }
+                  },
+                  "required": [
+                    "input"
+                  ]
+                }
+              },
+              "openapi_snippet": {
+                "openapi": "3.0.3",
+                "paths": {
+                  "/v1/thing": {
+                    "post": {
+                      "summary": "Target Thing \u2014 returns verdict, score",
+                      "description": "Target Thing \u2014 returns verdict, score. Use when you need structured data inside an agent workflow. $0.02 per call in USDC on Base via x402.",
+                      "requestBody": {
+                        "required": true,
+                        "content": {
+                          "application/json": {
+                            "schema": {
+                              "type": "object",
+                              "properties": {
+                                "thing_id": {
+                                  "type": "string"
+                                }
+                              },
+                              "required": [
+                                "thing_id"
+                              ]
+                            },
+                            "example": {
+                              "thing_id": "abc"
+                            }
+                          }
+                        }
+                      },
+                      "responses": {
+                        "200": {
+                          "description": "Success",
+                          "content": {
+                            "application/json": {
+                              "schema": {
+                                "type": "object",
+                                "properties": {
+                                  "verdict": {
+                                    "type": "string"
+                                  },
+                                  "score": {
+                                    "type": "integer"
+                                  }
+                                },
+                                "required": [
+                                  "verdict",
+                                  "score"
+                                ]
+                              },
+                              "example": {
+                                "verdict": "OK",
+                                "score": 12
+                              }
+                            }
+                          }
+                        },
+                        "402": {
+                          "description": "Payment required \u2014 x402 challenge; extensions.bazaar carries the discovery extension from this package."
+                        }
+                      }
+                    }
+                  }
+                }
+              },
+              "well_known_snippet": {
+                "resource": "https://target.example.com/v1/thing",
+                "method": "POST",
+                "price": "$0.02",
+                "scheme": "exact",
+                "mimeType": "application/json",
+                "description": "Target Thing \u2014 returns verdict, score. Use when you need structured data inside an agent workflow. $0.02 per call in USDC on Base via x402.",
+                "accepts": [
+                  {
+                    "scheme": "exact",
+                    "network": "eip155:8453",
+                    "amount": "20000",
+                    "asset": "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913",
+                    "payTo": "0x1111111111111111111111111111111111111111",
+                    "maxTimeoutSeconds": 300
+                  }
+                ],
+                "inputSchema": {
+                  "type": "object",
+                  "properties": {
+                    "thing_id": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "thing_id"
+                  ]
+                },
+                "outputSchema": {
+                  "type": "object",
+                  "properties": {
+                    "verdict": {
+                      "type": "string"
+                    },
+                    "score": {
+                      "type": "integer"
+                    }
+                  },
+                  "required": [
+                    "verdict",
+                    "score"
+                  ]
+                }
+              },
+              "instructions": "How to ship this package (standard x402 middleware, e.g. the Python/TS x402 SDKs):\n\n1. Set your route's description to package.description (it is under 500 characters,\n   so CDP-facilitator payments will not be rejected for length), e.g.:\n       RouteConfig(description=<package.description>, extensions={\"bazaar\": <package.extension>})\n2. Attach package.extension as the route's Bazaar discovery extension:\n       extensions={\"bazaar\": package[\"extension\"]} on the same route config.\n   The extension passed validate_discovery_extension and\n   validate_discovery_extension_spec at generation time.\n3. Replace the resource entry in your /.well-known/x402 manifest with\n   package.well_known_snippet, and merge package.openapi_snippet.paths into\n   your OpenAPI document.\n4. Keep the manifest accepts IDENTICAL to your live 402 challenge \u2014 directory\n   validators read the two against each other and reject mismatches.\n5. Metadata alone never lists you: settle one real payment through the CDP\n   facilitator (CDP Bazaar / Agentic.Market) or the PayAI facilitator (PayAI\n   index) and that index catalogs this route; re-settle at least every ~30 days\n   or the listing ages out.",
+              "validation": {
+                "consistency_valid": true,
+                "spec_valid": true
+              }
+            },
+            "notes": [
+              "inferred_from: single_sample \u2014 the output schema was inferred from the one sample supplied; review it before shipping, especially arrays (element schemas are merged) and any field whose real type varies."
+            ],
+            "ok": true,
+            "failure": null
+          },
+          "schema": {
+            "type": "object",
+            "required": [
+              "resource_url",
+              "graded_at",
+              "ok",
+              "failure",
+              "score_before",
+              "defects",
+              "package",
+              "notes"
+            ],
+            "properties": {
+              "resource_url": {
+                "type": "string"
+              },
+              "graded_at": {
+                "type": "string"
+              },
+              "ok": {
+                "type": "boolean"
+              },
+              "failure": {
+                "type": [
+                  "string",
+                  "null"
+                ],
+                "description": "Why no package was shipped, when ok is false \u2014 an unvalidatable package is never shipped broken"
+              },
+              "score_before": {
+                "type": [
+                  "integer",
+                  "null"
+                ],
+                "description": "The /v1/grade score of the listing as found"
+              },
+              "defects": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "required": [
+                    "name",
+                    "severity",
+                    "detail"
+                  ],
+                  "properties": {
+                    "name": {
+                      "type": "string"
+                    },
+                    "severity": {
+                      "type": "string",
+                      "enum": [
+                        "critical",
+                        "major",
+                        "minor"
+                      ]
+                    },
+                    "detail": {
+                      "type": "string"
+                    }
+                  }
+                }
+              },
+              "package": {
+                "type": [
+                  "object",
+                  "null"
+                ],
+                "properties": {
+                  "inferred_from": {
+                    "type": "string",
+                    "const": "single_sample"
+                  },
+                  "description": {
+                    "type": "string",
+                    "description": "Under 500 chars, with a use-when sentence"
+                  },
+                  "extension": {
+                    "type": "object",
+                    "description": "The repaired Bazaar discovery extension (passed both SDK validators)"
+                  },
+                  "openapi_snippet": {
+                    "type": "object"
+                  },
+                  "well_known_snippet": {
+                    "type": "object"
+                  },
+                  "instructions": {
+                    "type": "string"
+                  },
+                  "validation": {
+                    "type": "object",
+                    "required": [
+                      "consistency_valid",
+                      "spec_valid"
+                    ],
+                    "properties": {
+                      "consistency_valid": {
+                        "type": "boolean"
+                      },
+                      "spec_valid": {
+                        "type": "boolean"
+                      }
+                    }
+                  }
+                },
+                "required": [
+                  "inferred_from",
+                  "description",
+                  "extension",
+                  "openapi_snippet",
+                  "well_known_snippet",
+                  "instructions",
+                  "validation"
+                ]
+              },
+              "notes": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      },
+      "schema": {
+        "$schema": "https://json-schema.org/draft/2020-12/schema",
+        "type": "object",
+        "properties": {
+          "input": {
+            "type": "object",
+            "properties": {
+              "type": {
+                "type": "string",
+                "const": "http"
+              },
+              "method": {
+                "type": "string",
+                "enum": [
+                  "POST",
+                  "PUT",
+                  "PATCH"
+                ]
+              },
+              "bodyType": {
+                "type": "string",
+                "enum": [
+                  "json",
+                  "form-data",
+                  "text"
+                ]
+              },
+              "body": {
+                "type": "object",
+                "required": [
+                  "resource_url",
+                  "sample_output"
+                ],
+                "properties": {
+                  "resource_url": {
+                    "type": "string",
+                    "description": "Full URL of the x402 resource to repair, e.g. https://service.example.com/v1/endpoint"
+                  },
+                  "sample_output": {
+                    "description": "One real response body from the endpoint (required). The repaired output schema is inferred from this sample only \u2014 nothing is invented."
+                  },
+                  "name": {
+                    "type": "string",
+                    "description": "Optional display name for the generated description; derived from the URL when omitted."
+                  },
+                  "category": {
+                    "type": "string",
+                    "description": "Optional category (e.g. token-risk, search, data, media, monitoring) used to phrase the description's use-when sentence."
+                  }
+                }
+              }
+            },
+            "required": [
+              "type",
+              "method",
+              "bodyType",
+              "body"
+            ],
+            "additionalProperties": false
+          },
+          "output": {
+            "type": "object",
+            "properties": {
+              "type": {
+                "type": "string"
+              },
+              "example": {
+                "type": "object",
+                "required": [
+                  "resource_url",
+                  "graded_at",
+                  "ok",
+                  "failure",
+                  "score_before",
+                  "defects",
+                  "package",
+                  "notes"
+                ],
+                "properties": {
+                  "resource_url": {
+                    "type": "string"
+                  },
+                  "graded_at": {
+                    "type": "string"
+                  },
+                  "ok": {
+                    "type": "boolean"
+                  },
+                  "failure": {
+                    "type": [
+                      "string",
+                      "null"
+                    ],
+                    "description": "Why no package was shipped, when ok is false \u2014 an unvalidatable package is never shipped broken"
+                  },
+                  "score_before": {
+                    "type": [
+                      "integer",
+                      "null"
+                    ],
+                    "description": "The /v1/grade score of the listing as found"
+                  },
+                  "defects": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "required": [
+                        "name",
+                        "severity",
+                        "detail"
+                      ],
+                      "properties": {
+                        "name": {
+                          "type": "string"
+                        },
+                        "severity": {
+                          "type": "string",
+                          "enum": [
+                            "critical",
+                            "major",
+                            "minor"
+                          ]
+                        },
+                        "detail": {
+                          "type": "string"
+                        }
+                      }
+                    }
+                  },
+                  "package": {
+                    "type": [
+                      "object",
+                      "null"
+                    ],
+                    "properties": {
+                      "inferred_from": {
+                        "type": "string",
+                        "const": "single_sample"
+                      },
+                      "description": {
+                        "type": "string",
+                        "description": "Under 500 chars, with a use-when sentence"
+                      },
+                      "extension": {
+                        "type": "object",
+                        "description": "The repaired Bazaar discovery extension (passed both SDK validators)"
+                      },
+                      "openapi_snippet": {
+                        "type": "object"
+                      },
+                      "well_known_snippet": {
+                        "type": "object"
+                      },
+                      "instructions": {
+                        "type": "string"
+                      },
+                      "validation": {
+                        "type": "object",
+                        "required": [
+                          "consistency_valid",
+                          "spec_valid"
+                        ],
+                        "properties": {
+                          "consistency_valid": {
+                            "type": "boolean"
+                          },
+                          "spec_valid": {
+                            "type": "boolean"
+                          }
+                        }
+                      }
+                    },
+                    "required": [
+                      "inferred_from",
+                      "description",
+                      "extension",
+                      "openapi_snippet",
+                      "well_known_snippet",
+                      "instructions",
+                      "validation"
+                    ]
+                  },
+                  "notes": {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    }
+                  }
+                }
+              },
+              "schema": {
+                "type": "object"
+              }
+            },
+            "required": [
+              "type"
+            ]
+          }
+        },
+        "required": [
+          "input"
+        ]
+      }
+    }
+  }
+}

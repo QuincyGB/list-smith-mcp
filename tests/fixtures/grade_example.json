@@ -1,0 +1,33 @@
+{
+  "resource_url": "https://token-verdict-production.up.railway.app/v1/verdict",
+  "graded_at": "2026-10-23T15:30:00Z",
+  "reachable": true,
+  "http_status": 402,
+  "x402_valid": true,
+  "terms": {
+    "found": true,
+    "price_usdc": "example",
+    "amount_units": "example",
+    "network": "example",
+    "asset": "example",
+    "pay_to": "example",
+    "scheme": "example",
+    "x402_version": 0
+  },
+  "extension_present": true,
+  "sdk_validation": {
+    "ran": true,
+    "consistency_valid": true,
+    "spec_valid": true,
+    "errors": []
+  },
+  "schema_quality": {
+    "extension_present": true,
+    "hollow": true,
+    "score": 0,
+    "deductions": []
+  },
+  "defects": [],
+  "score": 88,
+  "fix_available": true
+}

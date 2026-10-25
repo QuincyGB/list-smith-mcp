@@ -1,0 +1,23 @@
+{
+  "resource_url": "https://token-verdict-production.up.railway.app/v1/verdict",
+  "graded_at": "2026-10-23T15:30:00Z",
+  "ok": true,
+  "failure": null,
+  "score_before": 42,
+  "defects": [],
+  "package": {
+    "inferred_from": "single_sample",
+    "description": "example",
+    "extension": {},
+    "openapi_snippet": {},
+    "well_known_snippet": {},
+    "instructions": "example",
+    "validation": {
+      "consistency_valid": true,
+      "spec_valid": true
+    }
+  },
+  "notes": [
+    "Repaired discovery package generated from the supplied sample output."
+  ]
+}

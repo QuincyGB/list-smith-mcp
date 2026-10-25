@@ -1,0 +1,60 @@
+{
+  "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+  "description": "MCP server for ListSmith — x402 listing grades ($0.10) and repairs ($0.50) on Base",
+  "name": "io.github.QuincyGB/list-smith-mcp",
+  "packages": [
+    {
+      "environmentVariables": [
+        {
+          "description": "EVM private key (0x...) of a wallet holding USDC on Base. Used locally to sign the x402 EIP-3009 authorization. For paid calls.",
+          "format": "string",
+          "isRequired": false,
+          "isSecret": true,
+          "name": "AGENT_PRIVATE_KEY"
+        },
+        {
+          "description": "Path to a file containing that key (alternative to AGENT_PRIVATE_KEY).",
+          "format": "filepath",
+          "isRequired": false,
+          "isSecret": false,
+          "name": "AGENT_KEY_FILE"
+        },
+        {
+          "description": "Service base URL override (default: production).",
+          "format": "string",
+          "isRequired": false,
+          "isSecret": false,
+          "name": "LIST_SMITH_URL"
+        },
+        {
+          "default": "100000",
+          "description": "Spend guard per grade call in USDC micro-units (default 100000 = $0.10, the known price). The client refuses to sign anything priced above it.",
+          "format": "number",
+          "isRequired": false,
+          "isSecret": false,
+          "name": "LIST_SMITH_GRADE_MAX_AMOUNT_UNITS"
+        },
+        {
+          "default": "500000",
+          "description": "Spend guard per fix call in USDC micro-units (default 500000 = $0.50, the known price). The client refuses to sign anything priced above it.",
+          "format": "number",
+          "isRequired": false,
+          "isSecret": false,
+          "name": "LIST_SMITH_FIX_MAX_AMOUNT_UNITS"
+        }
+      ],
+      "identifier": "list-smith-mcp",
+      "registryType": "pypi",
+      "transport": {
+        "type": "stdio"
+      },
+      "version": "0.1.1"
+    }
+  ],
+  "repository": {
+    "source": "github",
+    "url": "https://github.com/QuincyGB/list-smith-mcp"
+  },
+  "title": "ListSmith",
+  "version": "0.1.1"
+}
