@@ -4,7 +4,7 @@ build-backend = "hatchling.build"
 
 [project]
 name = "list-smith-mcp"
-version = "0.1.1"
+version = "0.1.2"
 description = "MCP server for ListSmith — pay-per-call x402 listing grades and repairs over x402 ($0.10 / $0.50 USDC on Base)"
 readme = "README.md"
 requires-python = ">=3.10"

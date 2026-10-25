@@ -48,7 +48,7 @@
       "transport": {
         "type": "stdio"
       },
-      "version": "0.1.1"
+      "version": "0.1.2"
     }
   ],
   "repository": {
@@ -56,5 +56,5 @@
     "url": "https://github.com/QuincyGB/list-smith-mcp"
   },
   "title": "ListSmith",
-  "version": "0.1.1"
+  "version": "0.1.2"
 }
