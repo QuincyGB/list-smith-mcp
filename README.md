@@ -1,6 +1,8 @@
 <!-- mcp-name: io.github.QuincyGB/list-smith-mcp -->
 # list-smith-mcp
 
+[![M8ven Score](https://m8ven.ai/badge/mcp/quincygb/list-smith-mcp)](https://m8ven.ai/mcp/quincygb/list-smith-mcp?s=readme)
+
 > **Standalone home:** This server was split out of `QuincyGB/token-verdict-tools` so each MCP server has its own GitHub repository for directory ingestion and maintenance. The PyPI package name (`list-smith-mcp`), version, and install command are unchanged.
 
 An [MCP](https://modelcontextprotocol.io) server (stdio transport) that

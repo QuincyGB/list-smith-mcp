@@ -32,6 +32,7 @@ import os
 from typing import Any
 
 from mcp.server.fastmcp import FastMCP
+from mcp.types import ToolAnnotations
 
 from .client import (
     DEFAULT_BASE_URL,
@@ -95,7 +96,21 @@ def run_fix(
     return _guarded(lambda: client.get_fix(resource_url, sample_output, name, category))
 
 
-@mcp.tool()
+# Annotations (all four hints, set to match the handler's real
+# behaviour): grading is diagnosis only — it reads the target's
+# published metadata and writes nothing anywhere — so readOnly holds,
+# destructive does not, and judged by server-side effect the call is
+# idempotent (no record or mutation accrues; each call does settle its
+# own $0.10 x402 charge, a payment, not a state change). openWorld:
+# the tool fetches documents from the target's external host.
+@mcp.tool(
+    annotations=ToolAnnotations(
+        readOnlyHint=True,
+        destructiveHint=False,
+        idempotentHint=True,
+        openWorldHint=True,
+    )
+)
 def list_grade(resource_url: str, sample_output: Any = None) -> dict[str, Any]:
     """Grade one x402 route's Bazaar discovery metadata.
 
@@ -113,7 +128,22 @@ def list_grade(resource_url: str, sample_output: Any = None) -> dict[str, Any]:
     return run_grade(resource_url, sample_output)
 
 
-@mcp.tool()
+# Annotations (all four hints, set to match the handler's real
+# behaviour): the fix is generated and RETURNED, never applied — the
+# caller pastes the snippets in themselves — so nothing is modified
+# anywhere: readOnly holds, destructive does not, and judged by
+# server-side effect the call is idempotent (no state is written to
+# the target or persisted per call; each call does settle its own
+# $0.50 x402 charge, a payment, not a state change). openWorld: the
+# tool reads the target's published metadata from its external host.
+@mcp.tool(
+    annotations=ToolAnnotations(
+        readOnlyHint=True,
+        destructiveHint=False,
+        idempotentHint=True,
+        openWorldHint=True,
+    )
+)
 def list_fix(
     resource_url: str,
     sample_output: Any,
